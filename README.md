@@ -4,7 +4,7 @@ Simple logger for express.
 
 ## Install
 
-not published yet
+`npm i giyu`
 
 ## Configuration
 
