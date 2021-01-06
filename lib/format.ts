@@ -5,13 +5,13 @@ export const getHTTPversion = (req: IncomingMessage) =>
     `HTTP/${req.httpVersion}`
 export const getUrl = (req: IncomingMessage) => req.url
 export const getStatus = (res: ServerResponse) => {
-    if (res.statusCode >= 200) {
+    if (res.statusCode.toString().startsWith('2')) {
         return `[${success(res.statusCode)}]`
-    } else if (res.statusCode >= 300) {
+    } else if (res.statusCode.toString().startsWith('3')) {
         return `[${info(res.statusCode)}]`
-    } else if (res.statusCode >= 400) {
+    } else if (res.statusCode.toString().startsWith('4')) {
         return `[${warn(res.statusCode)}]`
-    } else if (res.statusCode >= 500) {
+    } else if (res.statusCode.toString().startsWith('5')) {
         return `[${error(res.statusCode)}]`
     }
 }
