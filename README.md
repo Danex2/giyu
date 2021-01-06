@@ -4,7 +4,7 @@ Simple logger for express.
 
 ## Install
 
-`npm i giyu`
+`npm i giyu` or `yarn add giyu`
 
 ## Configuration
 
