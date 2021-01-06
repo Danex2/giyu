@@ -4,17 +4,15 @@ import { IncomingMessage, ServerResponse } from 'http'
 export const getHTTPversion = (req: IncomingMessage) =>
     `HTTP/${req.httpVersion}`
 export const getUrl = (req: IncomingMessage) => req.url
-export const getStatus = (req: ServerResponse) => {
-    if (req.statusCode.toString().startsWith('1')) {
-        return `[${info(req.statusCode)}]`
-    } else if (req.statusCode.toString().startsWith('2')) {
-        return `[${success(req.statusCode)}]`
-    } else if (req.statusCode.toString().startsWith('3')) {
-        return `[${warn(req.statusCode)}]`
-    } else if (req.statusCode.toString().startsWith('4')) {
-        return `[${error(req.statusCode)}]`
-    } else if (req.statusCode.toString().startsWith('5')) {
-        return `[${error(req.statusCode)}]`
+export const getStatus = (res: ServerResponse) => {
+    if (res.statusCode >= 200) {
+        return `[${success(res.statusCode)}]`
+    } else if (res.statusCode >= 300) {
+        return `[${info(res.statusCode)}]`
+    } else if (res.statusCode >= 400) {
+        return `[${warn(res.statusCode)}]`
+    } else if (res.statusCode >= 500) {
+        return `[${error(res.statusCode)}]`
     }
 }
 export const getMethod = (req: IncomingMessage) => req.method

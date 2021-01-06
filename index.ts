@@ -10,27 +10,33 @@ import {
     getDate,
 } from './lib/format'
 
-module.exports = function (format = 'compact') {
-    return function (request: IncomingMessage, response: ServerResponse, next) {
-        if (format === 'compact') {
-            log(
-                getStatus(response),
-                `"${getMethod(request)} ${getUrl(request)} ${getHTTPversion(
-                    request
-                )}"`
-            )
-        } else if (format === 'full') {
-            log(
-                getStatus(response),
-                getIP(request),
-                getDate(),
-                `"${getMethod(request)} ${getUrl(request)} ${getHTTPversion(
-                    request
-                )}"`,
-                getBytesSent(request)
-            )
-        }
+export enum Format {
+    Compact = 'compact',
+}
 
+module.exports = function (format: Format) {
+    return function (request: IncomingMessage, response: ServerResponse, next) {
         next()
+        switch (format) {
+            case Format.Compact:
+                log(
+                    getStatus(response),
+                    `"${getMethod(request)} ${getUrl(request)} ${getHTTPversion(
+                        request
+                    )}"`
+                )
+                break
+            default:
+                log(
+                    getStatus(response),
+                    getIP(request),
+                    getDate(),
+                    `"${getMethod(request)} ${getUrl(request)} ${getHTTPversion(
+                        request
+                    )}"`,
+                    getBytesSent(request)
+                )
+                break
+        }
     }
 }

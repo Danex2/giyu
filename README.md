@@ -8,7 +8,10 @@ not published yet
 
 ## Configuration
 
-Giyu comes with two formats, `full` or `compact`. The default value being `compact`.
+By default giyu will display the long version of a log.  
+![Full log for giyu](https://i.imgur.com/OPElioQ.png)
+
+To display a shorter version simply pass in the `compact` option.
 
 ```javascript
 const express = require('express')
@@ -20,7 +23,7 @@ app.use(giyu())
 
 /*
 or
-app.use(giyu('full'))
+app.use(giyu('compact'))
 */
 
 app.get('/', (req, res) => {
